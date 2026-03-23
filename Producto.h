@@ -11,7 +11,7 @@ using namespace std;
 
 class Producto {
 public:
-    virtual ~Producto();
+    virtual ~Producto(){};
     virtual string getDescripcion() = 0;
     virtual double getPrecio() = 0;
 

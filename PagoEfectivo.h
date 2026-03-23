@@ -12,7 +12,7 @@ private:
     public:
     PagoEfectivo(int monto=0);
     bool procesarPago(int montoPagar)override;
-    virtual ~PagoEfectivo();
+     ~PagoEfectivo();
 
 };
 

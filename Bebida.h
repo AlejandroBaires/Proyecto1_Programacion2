@@ -17,7 +17,7 @@ private:
     double getPrecio() override;
     int getTamanno();
     void setTamanno(int tamanno);
-    ~Bebida();
+     ~Bebida();
 };
 
 

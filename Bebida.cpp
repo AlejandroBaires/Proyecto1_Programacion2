@@ -22,3 +22,7 @@ int Bebida::getTamanno() {
 void Bebida::setTamanno(int tamanno) {
     this->tamanno = tamanno;
 }
+
+Bebida::~Bebida() {
+}
+

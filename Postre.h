@@ -14,7 +14,7 @@ class Postre:public Producto {
     Postre(string nombre=0, double precioBase=0.f);
     string getDescripcion() override;
     double getPrecio() override;
-    virtual ~Postre();
+     ~Postre();
 };
 
 

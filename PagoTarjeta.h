@@ -12,7 +12,7 @@ class PagoTarjeta:public MetodoPago {
     public:
     PagoTarjeta(string numeroTarjeta="", string nombreTarjeta="");
     bool procesarPago(int monto) override;
-    virtual ~PagoTarjeta();
+     ~PagoTarjeta();
 };
 
 
