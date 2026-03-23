@@ -4,7 +4,7 @@
 
 #include "Bebida.h"
 
-Bebida::Bebida(string nombre, double precioBase):nombre(nombre),precioBase(precioBase) {
+Bebida::Bebida(string nombre, double precioBase,int tammano):nombre(nombre),precioBase(precioBase),tamanno(tammano) {
 }
 
 string Bebida::getDescripcion() {
@@ -13,4 +13,12 @@ string Bebida::getDescripcion() {
 
 double Bebida::getPrecio() {
 return precioBase;
+}
+
+int Bebida::getTamanno() {
+    return tamanno;
+}
+
+void Bebida::setTamanno(int tamanno) {
+    this->tamanno = tamanno;
 }

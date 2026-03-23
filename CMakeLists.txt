@@ -11,4 +11,12 @@ add_executable(Proyecto1 main.cpp
         Postre.h
         Bebida.cpp
         Bebida.h
+        MetodoPago.cpp
+        MetodoPago.h
+        PagoTarjeta.cpp
+        PagoTarjeta.h
+        PagoEfectivo.cpp
+        PagoEfectivo.h
+        PagoEspecial.cpp
+        PagoEspecial.h
 )
