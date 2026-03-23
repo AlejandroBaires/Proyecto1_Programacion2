@@ -3,4 +3,12 @@ project(Proyecto1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Proyecto1 main.cpp)
+add_executable(Proyecto1 main.cpp
+        Producto.h
+        Comida.cpp
+        Comida.h
+        Postre.cpp
+        Postre.h
+        Bebida.cpp
+        Bebida.h
+)
