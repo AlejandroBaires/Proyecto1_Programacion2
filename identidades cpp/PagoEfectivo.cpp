@@ -2,7 +2,7 @@
 // Created by aleja on 23/3/2026.
 //
 
-#include "PagoEfectivo.h"
+#include "../identidades h/PagoEfectivo.h"
 
 PagoEfectivo::PagoEfectivo(int monto):monto(monto) {
 }

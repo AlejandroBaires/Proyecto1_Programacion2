@@ -2,7 +2,7 @@
 // Created by aleja on 23/3/2026.
 //
 
-#include "PagoEspecial.h"
+#include "../identidades h/PagoEspecial.h"
 
 PagoEspecial::PagoEspecial(string tipoPago):tipoPago(tipoPago) {
 }

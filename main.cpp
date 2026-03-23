@@ -1,9 +1,9 @@
-#include "Comida.h"
-#include "Bebida.h"
+#include "identidades h/Comida.h"
+#include "identidades h/Bebida.h"
 #include <vector>
 // El Decorator
-#include "PagoTarjeta.h"      // El Strategy de pago
-#include "PagoEfectivo.h"     // El Strategy de pago
+#include "identidades h/PagoTarjeta.h"
+#include "identidades h/PagoEfectivo.h"
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 int main() {
     cout << "=== PRUEBA DE METODOS (PRODUCTOS Y PAGOS) ===\n\n";

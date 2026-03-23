@@ -2,7 +2,7 @@
 // Created by aleja on 23/3/2026.
 //
 
-#include "PagoTarjeta.h"
+#include "../identidades h/PagoTarjeta.h"
 
 PagoTarjeta::PagoTarjeta(string numeroTarjeta, string nombreTarjeta):numeroTarjeta(numeroTarjeta),nombreTarjeta(nombreTarjeta) {
 }

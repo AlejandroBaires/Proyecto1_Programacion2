@@ -2,7 +2,7 @@
 // Created by aleja on 23/3/2026.
 //
 
-#include "Bebida.h"
+#include "../identidades h/Bebida.h"
 
 Bebida::Bebida(string nombre, double precioBase,int tammano):nombre(nombre),precioBase(precioBase),tamanno(tammano) {
 }

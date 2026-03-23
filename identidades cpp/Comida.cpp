@@ -2,7 +2,7 @@
 // Created by aleja on 23/3/2026.
 //
 
-#include "Comida.h"
+#include "../identidades h/Comida.h"
 
 
 Comida::Comida(string nombre, double precio): nombre(nombre), precioBase(precio) {
