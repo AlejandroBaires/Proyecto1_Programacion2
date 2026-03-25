@@ -10,8 +10,8 @@ int main() {
 
     // 1. CREACIÓN DE PRODUCTOS (Probando polimorfismo)
     // Usamos punteros de la clase base apuntando a objetos derivados
-    Producto* hamburguesa = new Comida("Hamburguesa Clasica", 5.00);
-    Producto* papas = new Comida("Papas Fritas", 2.50);
+    Producto* hamburguesa = new Comida("Hamburguesa Clasica", 3500);
+    Producto* papas = new Comida("Papas Fritas", 1700);
 
     // Agrupamos los productos en un vector (simulando lo que hara la clase Pedido despues)
     vector<Producto*> listaProductos;
@@ -37,11 +37,11 @@ int main() {
     pago1->procesarPago(total); // Deberia cobrar $7.50 exitosamente
 
     cout << "\n--- Prueba Pago con Efectivo ---\n";
-    MetodoPago* pago2 = new PagoEfectivo(10.00); // El cliente paga con $10.00
+    MetodoPago* pago2 = new PagoEfectivo(6000); // El cliente paga con $10.00
     pago2->procesarPago(total); // Deberia cobrar y dar $2.50 de vuelto
 
     cout << "\n--- Prueba Pago con Efectivo (Fondos Insuficientes) ---\n";
-    MetodoPago* pago3 = new PagoEfectivo(5.00); // El cliente paga con solo $5.00
+    MetodoPago* pago3 = new PagoEfectivo(3600); // El cliente paga con solo $5.00
     pago3->procesarPago(total); // Deberia mostrar error de fondos
 
     // 4. LIMPIEZA DE MEMORIA (Evitar fugas de memoria)
