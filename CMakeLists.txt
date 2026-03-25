@@ -23,5 +23,7 @@ add_executable(Proyecto1
         "identidades cpp/CambioTammano.cpp" "identidades h/CambioTammano.h"
         "identidades h/ProductoDecorador.h"
         "identidades cpp/IngredienteExtra.cpp" "identidades h/IngredienteExtra.h"
+        "identidades cpp/Cliente.cpp"
+        "identidades h/Cliente.h"
 
 )
