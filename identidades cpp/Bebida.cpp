@@ -8,7 +8,7 @@ Bebida::Bebida(string nombre, double precioBase,int tammano):nombre(nombre),prec
 }
 
 string Bebida::getDescripcion() {
-    return "Postre-"+this->nombre;
+    return "Bebida-"+this->nombre;
 }
 
 double Bebida::getPrecio() {

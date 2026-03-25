@@ -4,19 +4,19 @@ project(Proyecto1)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Proyecto1 main.cpp
-        "identidades h/Producto.h"
-        "identidades cpp/Comida.cpp"
-        "identidades h/Comida.h"
-        "identidades cpp/Postre.cpp"
-        "identidades h/Postre.h"
-        "identidades cpp/Bebida.cpp"
-        "identidades h/Bebida.h"
-        "identidades cpp/MetodoPago.cpp"
-        "identidades h/MetodoPago.h"
-        "identidades cpp/PagoTarjeta.cpp"
-        "identidades h/PagoTarjeta.h"
-        "identidades cpp/PagoEfectivo.cpp"
-        "identidades h/PagoEfectivo.h"
-        "identidades cpp/PagoEspecial.cpp"
-        "identidades h/PagoEspecial.h"
+        Producto.h
+        Comida.cpp
+        Comida.h
+        Postre.cpp
+        Postre.h
+        Bebida.cpp
+        Bebida.h
+        MetodoPago.cpp
+        MetodoPago.h
+        PagoTarjeta.cpp
+        PagoTarjeta.h
+        PagoEfectivo.cpp
+        PagoEfectivo.h
+        PagoEspecial.cpp
+        PagoEspecial.h
 )
