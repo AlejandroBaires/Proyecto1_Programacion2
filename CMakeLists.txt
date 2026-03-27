@@ -26,5 +26,6 @@ add_executable(Proyecto1
         "identidades cpp/Cliente.cpp"
         "identidades h/Cliente.h"
         "T Lista simple/Lista.h"
+        "identidades cpp/Producto.cpp"
 
 )

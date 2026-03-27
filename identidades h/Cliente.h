@@ -26,6 +26,10 @@ private:
     string to_String() const;
 
     string to_StringEspecial() const;
+
+    bool operator==(const Cliente &cliente) const;
+
+    friend ostream& operator<<(ostream& os, Cliente &cliente);
 };
 
 

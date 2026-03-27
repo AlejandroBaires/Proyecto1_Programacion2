@@ -11,9 +11,10 @@ class Postre:public Producto {
     string nombre;
     double precioBase;
     public:
-    Postre(string nombre=0, double precioBase=0.f);
+    Postre(int codigo=0,string nombre=0, double precioBase=0.f);
     string getDescripcion() override;
     double getPrecio() override;
+    bool igual(Producto &otro) override;
      ~Postre();
 };
 

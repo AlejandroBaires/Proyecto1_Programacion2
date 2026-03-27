@@ -4,7 +4,7 @@
 
 #include "../identidades h/Postre.h"
 
-Postre::Postre(string nombre, double precioBase):nombre(nombre),precioBase(precioBase) {
+Postre::Postre(int codigo,string nombre, double precioBase):Producto(codigo),nombre(nombre),precioBase(precioBase) {
 }
 
 string Postre::getDescripcion() {
@@ -13,6 +13,13 @@ string Postre::getDescripcion() {
 
 double Postre::getPrecio() {
     return precioBase;
+}
+
+bool Postre::igual(Producto &otro) {
+    Postre* o = dynamic_cast< Postre*>(&otro);
+    if (!o) return false;
+
+    return this->getCodigo() == o->getCodigo();
 }
 
 Postre::~Postre() {

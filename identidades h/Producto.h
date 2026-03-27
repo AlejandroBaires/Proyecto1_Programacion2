@@ -10,11 +10,21 @@
 using namespace std;
 
 class Producto {
+protected:
+    int codigo;
 public:
+    Producto(int codigo=0);
+    virtual int getCodigo();
     virtual ~Producto() = default;
     virtual string getDescripcion() = 0;
     virtual double getPrecio() = 0;
+    virtual bool igual(Producto& otro)=0;
+    friend ostream& operator<<(ostream& os, Producto& otro);
 };
+
+inline bool operator==( Producto& a,  Producto& b) {
+    return a.igual(b);
+}
 
 
 #endif //PROYECTO1_PRODUCTO_H

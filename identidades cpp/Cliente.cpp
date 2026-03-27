@@ -36,3 +36,11 @@ string Cliente::to_StringEspecial() const {
     ss<<get_id()<<";"<<get_nombre();
     return ss.str();
 }
+
+bool Cliente::operator==(const Cliente &cliente) const {
+    return (this->get_id() == cliente.get_id());
+}
+
+ostream & operator<<(ostream &os, Cliente &cliente) {
+    return os<<cliente.to_String();
+}
