@@ -126,6 +126,13 @@ public:
         cout << endl;
     }
 
+    Nodo<T> * getPrimerNodo() {
+        if (primero == nullptr) {
+            return nullptr;
+        }
+        return primero;
+    }
+
 
     //MÉTODOS UTILES DE LA LISTA
     bool estaVacio() {
