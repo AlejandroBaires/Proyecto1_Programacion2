@@ -4,8 +4,8 @@
 
 #include "../identidades h/IngredienteExtra.h"
 
-IngredienteExtra::IngredienteExtra(unique_ptr<Producto> productoDecorador, string ingrediente) {
-    this->producto = move(productoDecorador);
+IngredienteExtra::IngredienteExtra(Producto* productoDecorador, string ingrediente) {
+    this->producto = productoDecorador;
     this->ingrediente = ingrediente;
 
 }
@@ -16,4 +16,8 @@ string IngredienteExtra::getDescripcion() {
 
 double IngredienteExtra::getPrecio() {
     return producto->getPrecio();
+}
+
+bool IngredienteExtra::igual(Producto &otro) {
+    return this->getCodigo()==otro.getCodigo();
 }

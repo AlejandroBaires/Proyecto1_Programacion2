@@ -10,9 +10,10 @@ using namespace std;
 
 class ProductoDecorador:public Producto {
 protected:
-    unique_ptr<Producto> producto;
+    Producto* producto;
     public:
-    ProductoDecorador(unique_ptr<Producto> producto=nullptr);
+    ProductoDecorador(Producto* producto=nullptr);
+    int getCodigo() override;
     virtual ~ProductoDecorador(){};
 
 };

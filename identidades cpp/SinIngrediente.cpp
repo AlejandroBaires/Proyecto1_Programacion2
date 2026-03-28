@@ -4,8 +4,8 @@
 
 #include "../identidades h/SinIngrediente.h"
 
-SinIngrediente::SinIngrediente(unique_ptr<Producto> productoDecorador, string ingrediente) {
-    this->producto = move(productoDecorador);
+SinIngrediente::SinIngrediente(Producto* productoDecorador, string ingrediente) {
+    this->producto = productoDecorador;
     this->ingrediente = ingrediente;
 }
 
@@ -15,4 +15,8 @@ string SinIngrediente::getDescripcion() {
 
 double SinIngrediente::getPrecio() {
     return producto->getPrecio();
+}
+
+bool SinIngrediente::igual(Producto &otro) {
+    return this->getCodigo()==otro.getCodigo();
 }

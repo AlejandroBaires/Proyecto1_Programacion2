@@ -10,9 +10,10 @@ class SinIngrediente:public ProductoDecorador {
 protected:
     string ingrediente;
     public:
-    SinIngrediente(unique_ptr<Producto> productoDecorador,string ingrediente);
+    SinIngrediente(Producto* productoDecorador,string ingrediente);
     string getDescripcion() override;
     double getPrecio() override;
+    bool igual(Producto &otro) override;
     virtual ~SinIngrediente(){};
 };
 

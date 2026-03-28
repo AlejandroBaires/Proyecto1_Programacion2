@@ -4,8 +4,8 @@
 
 #include "../identidades h/CambioTammano.h"
 
-CambioTammano::CambioTammano(unique_ptr<Producto> producto, string tammano) {
-    this->producto = move(producto);
+CambioTammano::CambioTammano(Producto* producto, string tammano) {
+    this->producto = producto;
     this->tammano = tammano;
 }
 
@@ -20,4 +20,8 @@ double CambioTammano::getPrecio() {
         return producto->getPrecio()*0.50;
     }
 
+}
+
+bool CambioTammano::igual(Producto &otro) {
+    return otro.getCodigo()==otro.getCodigo();
 }

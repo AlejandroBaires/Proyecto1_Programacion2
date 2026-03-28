@@ -14,7 +14,7 @@ private:
     Nodo<T>* siguiente;
 public:
     //Constructor
-    Nodo(T* _dato, Nodo<T>* _sig):dato(_dato), siguiente(_sig){}
+    Nodo(T* _dato=nullptr, Nodo<T>* _sig=nullptr):dato(_dato), siguiente(_sig){}
     //Destructor
     ~Nodo() {
         dato = nullptr;

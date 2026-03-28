@@ -10,9 +10,10 @@ class IngredienteExtra:public ProductoDecorador {
 protected:
     string ingrediente;
 public:
-    IngredienteExtra(unique_ptr<Producto> productoDecorador=nullptr,string ingrediente="");
+    IngredienteExtra(Producto* productoDecorador=nullptr,string ingrediente="");
     string getDescripcion() override;
     double getPrecio() override;
+    bool igual(Producto &otro) override;
     virtual ~IngredienteExtra(){};
 };
 

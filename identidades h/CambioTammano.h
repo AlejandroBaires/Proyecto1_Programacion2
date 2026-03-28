@@ -9,9 +9,10 @@
 class CambioTammano:public ProductoDecorador{
     string tammano;
     public:
-    CambioTammano(unique_ptr<Producto> producto,string tammano);
+    CambioTammano(Producto* producto,string tammano);
     string getDescripcion() override;
     double getPrecio() override;
+    bool igual(Producto &otro) override;
     virtual ~CambioTammano(){};
 };
 
