@@ -4,10 +4,10 @@
 
 #include "../identidades h/PagoEfectivo.h"
 
-PagoEfectivo::PagoEfectivo(int monto):monto(monto) {
+PagoEfectivo::PagoEfectivo(double monto):monto(monto) {
 }
 
-bool PagoEfectivo::procesarPago(int montoPagar) {
+bool PagoEfectivo::procesarPago(double montoPagar) {
     if (monto < montoPagar) {
         cout<<"Monto insuficiente"<<endl;
         return false;

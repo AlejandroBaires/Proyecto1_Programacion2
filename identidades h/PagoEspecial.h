@@ -11,7 +11,7 @@ class PagoEspecial:public MetodoPago{
     string tipoPago;
     public:
     PagoEspecial(string tipoPago);
-    bool procesarPago(int monto);
+    bool procesarPago(double monto);
      ~PagoEspecial();
 
 };

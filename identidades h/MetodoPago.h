@@ -10,7 +10,7 @@ using namespace std;
 class MetodoPago {
 public:
     virtual ~MetodoPago() {}
-    virtual bool procesarPago(int monto)=0;
+    virtual bool procesarPago(double monto)=0;
 
 };
 

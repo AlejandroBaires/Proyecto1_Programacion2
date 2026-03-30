@@ -9,8 +9,9 @@
 class IngredienteExtra:public ProductoDecorador {
 protected:
     string ingrediente;
+    double precioExtra;
 public:
-    IngredienteExtra(Producto* productoDecorador=nullptr,string ingrediente="");
+    IngredienteExtra(Producto* productoDecorador=nullptr,string ingrediente="", double precio=0.50);
     string getDescripcion() override;
     double getPrecio() override;
     bool igual(Producto &otro) override;

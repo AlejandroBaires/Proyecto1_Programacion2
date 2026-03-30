@@ -4,10 +4,10 @@
 
 #include "../identidades h/IngredienteExtra.h"
 
-IngredienteExtra::IngredienteExtra(Producto* productoDecorador, string ingrediente) {
+IngredienteExtra::IngredienteExtra(Producto* productoDecorador, string ingrediente, double precio){
     this->producto = productoDecorador;
     this->ingrediente = ingrediente;
-
+    this->precioExtra = precio;
 }
 
 string IngredienteExtra::getDescripcion() {

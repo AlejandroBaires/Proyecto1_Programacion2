@@ -109,7 +109,7 @@ int main() {
     cout<<pedido.toString();
 
     // Pago
-    MetodoPago* pago = new PagoEfectivo(20);
+    MetodoPago* pago = new PagoEfectivo(20.0);
     pedido.cobrarPedido(pago);
 
 

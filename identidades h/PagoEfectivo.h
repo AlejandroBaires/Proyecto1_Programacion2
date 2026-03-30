@@ -8,10 +8,10 @@
 
 class PagoEfectivo:public MetodoPago{
 private:
-    int monto;
+    double monto;
     public:
-    PagoEfectivo(int monto=0);
-    bool procesarPago(int montoPagar)override;
+    PagoEfectivo(double monto=0);
+    bool procesarPago(double montoPagar)override;
      ~PagoEfectivo();
 
 };

@@ -7,7 +7,7 @@
 PagoEspecial::PagoEspecial(string tipoPago):tipoPago(tipoPago) {
 }
 
-bool PagoEspecial::procesarPago(int monto) {
+bool PagoEspecial::procesarPago(double monto) {
     cout<<"Pago por medio de "<<tipoPago<<endl;
     cout<<"Pago procesado correctamente"<<endl;
     return true;

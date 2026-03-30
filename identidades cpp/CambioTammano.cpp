@@ -19,9 +19,12 @@ double CambioTammano::getPrecio() {
     }else if (tammano=="pequeno"||tammano=="Pequeno") {
         return producto->getPrecio()*0.50;
     }
+    else {
+        return producto->getPrecio(); //tamaño normal, no grande ni pequeña;
+    }
 
 }
 
 bool CambioTammano::igual(Producto &otro) {
-    return otro.getCodigo()==otro.getCodigo();
+    return this->getCodigo()==otro.getCodigo();
 }

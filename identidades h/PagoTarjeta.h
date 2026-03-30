@@ -11,7 +11,7 @@ class PagoTarjeta:public MetodoPago {
     string nombreTarjeta;
     public:
     PagoTarjeta(string numeroTarjeta="", string nombreTarjeta="");
-    bool procesarPago(int monto) override;
+    bool procesarPago(double monto) override;
      ~PagoTarjeta();
 };
 

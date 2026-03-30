@@ -7,7 +7,7 @@
 PagoTarjeta::PagoTarjeta(string numeroTarjeta, string nombreTarjeta):numeroTarjeta(numeroTarjeta),nombreTarjeta(nombreTarjeta) {
 }
 
-bool PagoTarjeta::procesarPago(int monto) {
+bool PagoTarjeta::procesarPago(double monto) {
     cout <<"Cobrando: "<<monto<<" a la tarjeta "<<nombreTarjeta<<endl;
     cout <<"Cobro procesado";
     return true;
