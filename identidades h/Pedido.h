@@ -5,7 +5,6 @@
 #ifndef PROYECTO1_PEDIDO_H
 #define PROYECTO1_PEDIDO_H
 
-#endif //PROYECTO1_PEDIDO_H
 #include "Cliente.h"
 #include "Producto.h"
 #include "MetodoPago.h"
@@ -50,3 +49,5 @@ public:
 
     ~Pedido();
 };
+
+#endif
