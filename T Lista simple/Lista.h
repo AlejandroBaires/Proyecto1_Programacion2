@@ -138,5 +138,9 @@ public:
     bool estaVacio() {
         return cantidad == 0;
     }
+
+    int getCantidad() {
+        return cantidad;
+    }
 };
 #endif //HELLO_WORLD_LISTA_H

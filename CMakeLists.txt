@@ -3,6 +3,8 @@ project(Proyecto1)
 
 set(CMAKE_CXX_STANDARD 20)
 
+include_directories("identidades h")
+
 add_executable(Proyecto1
         main.cpp
 
