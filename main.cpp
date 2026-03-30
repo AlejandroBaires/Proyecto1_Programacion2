@@ -2,6 +2,7 @@
 #include "identidades h/Postre.h"
 #include "identidades h/Comida.h"
 #include "identidades h/Bebida.h"
+//PAGO
 #include "identidades h/PagoTarjeta.h"
 #include "identidades h/PagoEfectivo.h"
 //LISTA
@@ -10,6 +11,10 @@
 #include "identidades h/IngredienteExtra.h"
 #include "identidades h/CambioTammano.h"
 #include "identidades h/SinIngrediente.h"
+//CLIENTE
+#include "identidades h/Cliente.h"
+//PEDIDO
+#include "identidades h/Pedido.h"
 int main() {
 
     cout << "========== PRUEBA PRODUCTOS ==========\n";
@@ -82,8 +87,31 @@ int main() {
     lista.mostrarDatos();
 
 
-    cout << "\n========== FIN ==========\n";
+    cout << "\n========== FIN ==========\n"<<endl;
 
-    return 0;
+
+    cout<<"============ PRUEBA PEDIDO ============"<<endl;
+
+    Cliente* c = new Cliente("Juan", 1);
+
+    Pedido pedido(1001, c);
+
+    // Productos
+    pedido.agregar_producto(new Comida(1, "Hamburguesa", 5));
+
+    // Decorador
+    Producto* p = new Comida(2, "Pizza", 8);
+    p = new IngredienteExtra(p, " + Queso");
+
+    pedido.agregar_producto(p);
+
+    // Mostrar
+    cout<<pedido.toString();
+
+    // Pago
+    MetodoPago* pago = new PagoEfectivo(20);
+    pedido.cobrarPedido(pago);
+
+
     return 0;
 }
