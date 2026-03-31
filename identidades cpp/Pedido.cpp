@@ -26,14 +26,6 @@ void Pedido::set_cliente(Cliente *cliente) {
     this->cliente = cliente;
 }
 
-Lista<Producto> Pedido::get_listaProductos() const {
-    return listaProductos;
-}
-
-void Pedido::set_listaProductos(const Lista<Producto> &lista) {
-    this->listaProductos = lista;
-}
-
 string Pedido::get_estado() const {
     return estado;
 }

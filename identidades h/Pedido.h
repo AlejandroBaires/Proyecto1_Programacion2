@@ -27,10 +27,6 @@ public:
 
     void set_cliente(Cliente *cliente);
 
-    Lista<Producto> get_listaProductos() const;
-
-    void set_listaProductos(const Lista<Producto> &lista);
-
     string get_estado() const;
 
     void set_estado(const string &estado);
