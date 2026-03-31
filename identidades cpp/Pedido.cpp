@@ -51,9 +51,13 @@ void Pedido::agregar_producto(Producto *p) {
 }
 
 double Pedido::calcularTotal() {
+    if (listaProductos.estaVacio()) {
+        throw runtime_error("El pedido esta vacio");
+    }
+
     double total = 0;
     Nodo<Producto> *aux=listaProductos.getPrimerNodo();
-    while(aux!=NULL) {
+    while(aux!=nullptr) {
         total+=aux->getDato()->getPrecio();
         aux=aux->getSiguiente();
     }
@@ -65,7 +69,9 @@ void Pedido::cobrarPedido(MetodoPago* metodo) {
     if (metodo->procesarPago(total)) {
         set_estado("Pagado");
     }
-
+    else {
+        throw runtime_error("Pago Fallido: monto insuficiente");
+    }
 }
 
 string Pedido::toString() {

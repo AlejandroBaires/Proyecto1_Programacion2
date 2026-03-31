@@ -101,7 +101,7 @@ int main() {
 
     // Decorador
     Producto* p = new Comida(2, "Pizza", 8);
-    p = new IngredienteExtra(p, " + Queso");
+    p = new IngredienteExtra(p, " Queso");
 
     pedido.agregar_producto(p);
 
@@ -111,7 +111,6 @@ int main() {
     // Pago
     MetodoPago* pago = new PagoEfectivo(20.0);
     pedido.cobrarPedido(pago);
-
 
     return 0;
 }

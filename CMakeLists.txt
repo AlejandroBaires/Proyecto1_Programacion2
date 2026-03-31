@@ -31,5 +31,7 @@ add_executable(Proyecto1
         "identidades cpp/Producto.cpp"
         "identidades h/Pedido.h"
         "identidades cpp/Pedido.cpp"
+        GestorArchivos.cpp
+        GestorArchivos.h
 
 )
