@@ -41,6 +41,17 @@ public:
     Lista(): primero(nullptr), cantidad(0){}
     ~Lista(){eliminar();}
 
+    //Copy Constructor
+    Lista(const Lista<T>& otra) : primero(nullptr), cantidad(0) {
+        Nodo<T>* aux = otra.primero;
+        while (aux != nullptr) {
+            //copia profunda, crea nuevos nodos con nuevos datos
+            T* copia = new T(aux->getDato());
+            insertarInicio(copia);
+            aux = aux->getSiguiente();
+        }
+    }
+
     //MÉTODOS BASICOS DE UNA LISTA
     bool insertarInicio(T * dato) {
         //Comprobación de que el dato no sea nulo
@@ -61,7 +72,6 @@ public:
             return insertarInicio(dato);
         }
 
-        //
         Nodo<T>* aux = primero;
         while (aux->getSiguiente() != nullptr) {
             aux = aux->getSiguiente();
@@ -141,6 +151,20 @@ public:
 
     int getCantidad() {
         return cantidad;
+    }
+
+    //Sobrecarga de operadores
+    Lista<T>& operator=(const Lista<T>& otra) {
+        if (this == &otra) return *this;        //evitar auto-asignacion
+        eliminar();                             //limpia lo que habia antes
+
+        Nodo<T>* aux = otra.primero;
+        while (aux != nullptr) {
+            T* copia = new T(*aux->getDato());
+            insertarInicio(copia);
+            aux = aux->getSiguiente();
+        }
+        return *this;
     }
 };
 #endif //HELLO_WORLD_LISTA_H

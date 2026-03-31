@@ -6,6 +6,7 @@
 #define PROYECTO1_GESTORARCHIVOS_H
 
 
+
 class GestorArchivos {
 };
 
