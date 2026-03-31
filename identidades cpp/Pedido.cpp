@@ -38,6 +38,10 @@ bool Pedido::operator==(const Pedido &pedido) const {
     return (this->get_num_pedido() == pedido.get_num_pedido());
 }
 
+Nodo<Producto> * Pedido::getPrimer_producto() {
+    return listaProductos.getPrimerNodo();
+}
+
 void Pedido::agregar_producto(Producto *p) {
     listaProductos.insertarFinal(p);
 }

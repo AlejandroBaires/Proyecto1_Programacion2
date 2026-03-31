@@ -33,6 +33,8 @@ public:
 
     bool operator==(const Pedido &pedido) const;
 
+    Nodo<Producto>* getPrimer_producto();
+
     //METODOS PARTICULARES
 
     void agregar_producto(Producto* p);

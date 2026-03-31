@@ -26,9 +26,19 @@ Json::Value GestorArchivos::pedidoAJson(Pedido *pedido) {
     obj["numPedido"] = pedido->get_num_pedido();
     obj["estado"] = pedido->get_estado();
 
-    if (pedido->get_estado() != nullptr) {
-
+    if (pedido->get_cliente() != nullptr) {
+        obj["cliente"] = clienteAJson(pedido->get_cliente());
     }
+
+    Json::Value productos(Json::arrayValue);
+    Nodo<Producto>* aux = pedido->getPrimer_producto();
+    while (aux != nullptr) {
+        productos.append(productoAJson(aux->getDato()));
+        aux = aux->getSiguiente();
+    }
+    obj["productos"] = productos;
+
+    return obj;
 }
 
 //Deserialización. Json::Value -> Objeto
