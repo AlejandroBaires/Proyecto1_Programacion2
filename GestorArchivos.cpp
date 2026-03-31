@@ -44,13 +44,44 @@ Json::Value GestorArchivos::pedidoAJson(Pedido *pedido) {
 //Deserialización. Json::Value -> Objeto
 
 Cliente* GestorArchivos::jsonACliente(const Json::Value &obj) {
-
+    int id = obj["id"].asInt();
+    string nombre = obj["nombre"].asString();
+    return new Cliente(nombre, id);
 }
 
 Producto* GestorArchivos::jsonAProducto(const Json::Value &obj) {
+    int codigo = obj["codigo"].asInt();
+    string descripcion = obj["descripcion"].asString();
+    double precio = obj["precio"].asDouble();
+
+    if (descripcion.find("Comida") != string::npos) {
+        return new Comida(codigo, descripcion, precio);
+    }
+    else if (descripcion.find("Bebida") != string::npos) {
+        return new Bebida(codigo, descripcion, precio);
+    }
+    else {
+        return new Postre(codigo, descripcion, precio);
+    }
 }
 
 Pedido* GestorArchivos::jsonAPedido(const Json::Value &obj) {
+    int numPedido = obj["numPedido"].asInt();
+    string estado = obj["estado"].asString();
+
+    Cliente* cliente = nullptr;
+    if (obj.isMember("cliente")) {
+        cliente = jsonACliente(obj["cliente"]);
+    }
+
+    Pedido* pedido = new Pedido(numPedido, cliente);
+    pedido->set_estado(estado);
+
+    const Json::Value& productos = obj["productos"];
+    for (int i=0; i < (int)productos.size(); i++) {
+        pedido->agregar_producto(jsonAProducto(productos[i]));
+    }
+    return pedido;
 }
 
 
