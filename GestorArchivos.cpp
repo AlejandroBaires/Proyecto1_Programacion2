@@ -87,37 +87,137 @@ Pedido* GestorArchivos::jsonAPedido(const Json::Value &obj) {
 
 
 bool GestorArchivos::guardarCliente(Cliente *cliente, const string &nombreArchivo) {
+    if (cliente == nullptr) {
+        throw runtime_error("Cliente nulo, no se puede guardar");
+    }
+
+    ofstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        throw runtime_error("No se pudo abrir el archivo " + nombreArchivo);
+    }
+
+    Json::StreamWriterBuilder builder;
+    builder["commentStyle"] = "None";
+    builder["indentation"] = "  ";
+    unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
+    writer->write(clienteAJson(cliente), &archivo);
+    archivo.close();
+    return true;
 }
 
 Cliente * GestorArchivos::cargarCliente(const string &nombreArchivo) {
+    ifstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        throw runtime_error("Archivo de cliente no encontrado");
+    }
+
+    Json::Value obj;
+    Json::Reader reader;
+
+    if (!reader.parse(archivo, obj)) {
+        throw runtime_error("Error al parsear el archivo: " + nombreArchivo);
+    }
+
+    return jsonACliente(obj);
 }
 
+
 bool GestorArchivos::guardarProducto(Producto *producto, const string &nombreArchivo) {
+    if (producto == nullptr) {
+        throw runtime_error("Producto nulo, no se puede guardar");
+    }
+
+    ofstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        throw runtime_error("No se pudo abrir el archivo: " + nombreArchivo);
+    }
+
+    Json::StreamWriterBuilder builder;
+    builder["commentStyle"] = "None";
+    builder["indentation"] = "  ";
+    unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
+    writer->write(productoAJson(producto), &archivo);
+    archivo.close();
+    return true;
 }
 
 Producto * GestorArchivos::cargarProducto(const string &nombreArchivo) {
+    ifstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        throw runtime_error("Archivo de Productos no encontrado");
+    }
+
+    Json::Value obj;
+    Json::Reader reader;
+
+    if (!reader.parse(archivo, obj)) {
+        throw runtime_error("Error al parsear el archivo: " + nombreArchivo);
+    }
+
+    return jsonAProducto(obj);
 }
 
+
 bool GestorArchivos::guardarPedido(Pedido *pedido, const string &nombreArchivo) {
+    if (pedido==nullptr) {
+        throw runtime_error("Pedido nulo, no se puede guardar");
+    }
+
+    ofstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        throw runtime_error("No se pudo abrir el archivo: " + nombreArchivo);
+    }
+
+    Json::StreamWriterBuilder builder;
+    builder["commentStyle"] = "None";
+    builder["indentation"] = "  ";
+    unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
+    writer->write(pedidoAJson(pedido), &archivo);
+    archivo.close();
+    return true;
 }
 
 Pedido * GestorArchivos::cargarPedido(const string &nombreArchivo) {
+    ifstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        throw runtime_error("Archivo de Pedidos no encontrado");
+    }
+
+    Json::Value obj;
+    Json::Reader reader;
+
+    if (!reader.parse(archivo, obj)) {
+        throw runtime_error("Error al parsear el archivo: " + nombreArchivo);
+    }
+
+    return jsonAPedido(obj);
 }
 
+
+
+
 bool GestorArchivos::guardarListaClientes(Lista<Cliente> &lista, const string &nombreArchivo) {
+
 }
 
 bool GestorArchivos::guardarListaProductos(Lista<Producto> &lista, const string &nombreArchivo) {
+
 }
 
+
 bool GestorArchivos::guardarListaPedidos(Lista<Pedido> &lista, const string &nombreArchivo) {
+
 }
 
 void GestorArchivos::cargarListaClientes(const string &nombreArchivo, Lista<Cliente> &lista) {
+
 }
 
+
 void GestorArchivos::cargarListaProdcutos(const string &nombreArchivo, Lista<Producto> &lista) {
+
 }
 
 void GestorArchivos::cargarListaPedidos(const string &nombreArchivo, Lista<Pedido> &lista) {
+
 }
