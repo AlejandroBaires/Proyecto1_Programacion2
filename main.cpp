@@ -1,4 +1,4 @@
-//PRODUCTO
+
 #include "identidades h/Postre.h"
 #include "identidades h/Comida.h"
 #include "identidades h/Bebida.h"
@@ -15,102 +15,43 @@
 #include "identidades h/Cliente.h"
 //PEDIDO
 #include "identidades h/Pedido.h"
+#include "GestorArchivos.h"
 int main() {
 
-    cout << "========== PRUEBA PRODUCTOS ==========\n";
+    Cliente* c1 = new Cliente("Scott", 604970469);
+    Cliente* c2 = new Cliente("Andre", 454561848);
+    Cliente* c3 = new Cliente("Pipe", 145665148);
 
-    // Crear lista (IMPORTANTE: Lista<Producto>)
-    Lista<Producto> lista;
-
-    // Productos base
-    Producto* p1 = new Comida(1, "Hamburguesa", 5.0);
-    Producto* p2 = new Bebida(2, "Coca Cola", 2.0, 1);
-    Producto* p3 = new Postre(3, "Helado", 3.0);
-
-    lista.insertarFinal(p1);
-    lista.insertarFinal(p2);
-    lista.insertarFinal(p3);
-
-    cout << "\n--- Lista inicial ---\n";
-    lista.mostrarDatos();
+    Producto* prod1 = new Comida(1, "Hamburguesa", 5000.0);
+    Producto* prod2 = new Bebida(2, "Coca-Cola", 1200.0, 700.0);
+    Producto* prod3 = new Postre(3, "Tiramizu", 3000.0);
+    Producto* prod4 = new Comida(4, "Pizza", 9000.0);
+    Producto* prod5 = new Bebida(5, "Fanta Uva", 1000.0, 700.0);
 
 
-    cout << "\n========== PRUEBA DECORADORES ==========\n";
+    GestorArchivos gestor;
+    string nombreArchivoC = "Clientes.txt";
+    string nombreArchivoProd = "Productos.txt";
 
-    // Crear producto decorado
-    Producto* prod=new Comida(4, "Hamburguesa Especial", 6.0);
+    gestor.guardarCliente(c1, nombreArchivoC);
+    gestor.guardarCliente(c2, nombreArchivoC);
+    gestor.guardarCliente(c3, nombreArchivoC);
 
-    prod = new IngredienteExtra(prod,"Queso");
-    prod = new CambioTammano(prod,"Grande");
-    prod = new SinIngrediente(prod, "Cebolla");
+    gestor.guardarProducto(prod1, nombreArchivoProd);
+    gestor.guardarProducto(prod2, nombreArchivoProd);
+    gestor.guardarProducto(prod3, nombreArchivoProd);
+    gestor.guardarProducto(prod4, nombreArchivoProd);
+    gestor.guardarProducto(prod5, nombreArchivoProd);
 
-    cout << "Producto decorado:\n";
-    cout << prod->getDescripcion() << endl;
-    cout << "Precio: $" << prod->getPrecio() << endl;
+    delete c1;
+    delete c2;
+    delete c3;
 
-    // Insertar en lista (IMPORTANTE)
-    lista.insertarFinal(prod);
-
-
-    cout << "\n--- Lista con decorador ---\n";
-    lista.mostrarDatos();
-
-
-    cout << "\n========== PRUEBA BUSQUEDA ==========\n";
-
-    Producto* buscar = new Comida(1, "Hamburguesa", 5.0);
-
-    Producto* encontrado = lista.BuscarDato(buscar);
-
-    if (encontrado != nullptr) {
-        cout << "Encontrado: " << *encontrado << endl;
-    } else {
-        cout << "No encontrado\n";
-    }
-
-    delete buscar; // ⚠️ importante
-
-
-    cout << "\n========== PRUEBA ELIMINAR ==========\n";
-
-    Producto* eliminar = new Bebida(2, "Coca Cola", 2.0, 1);
-
-    if (lista.eliminarDato(eliminar)) {
-        cout << "Producto eliminado correctamente\n";
-    } else {
-        cout << "No se pudo eliminar\n";
-    }
-
-    delete eliminar; // ⚠️ importante
-
-    cout << "\n--- Lista final ---\n";
-    lista.mostrarDatos();
-
-
-    cout << "\n========== FIN ==========\n"<<endl;
-
-
-    cout<<"============ PRUEBA PEDIDO ============"<<endl;
-
-    Cliente* c = new Cliente("Juan", 1);
-
-    Pedido pedido(1001, c);
-
-    // Productos
-    pedido.agregar_producto(new Comida(1, "Hamburguesa", 5));
-
-    // Decorador
-    Producto* p = new Comida(2, "Pizza", 8);
-    p = new IngredienteExtra(p, " Queso");
-
-    pedido.agregar_producto(p);
-
-    // Mostrar
-    cout<<pedido.toString();
-
-    // Pago
-    MetodoPago* pago = new PagoEfectivo(20.0);
-    pedido.cobrarPedido(pago);
+    delete prod1;
+    delete prod2;
+    delete prod3;
+    delete prod4;
+    delete prod5;
 
     return 0;
 }

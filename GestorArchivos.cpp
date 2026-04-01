@@ -87,21 +87,33 @@ Pedido* GestorArchivos::jsonAPedido(const Json::Value &obj) {
 
 
 bool GestorArchivos::guardarCliente(Cliente *cliente, const string &nombreArchivo) {
-    if (cliente == nullptr) {
-        throw runtime_error("Cliente nulo, no se puede guardar");
+    if (cliente == nullptr)
+        throw runtime_error("Cliente nulo, no se puede guardar.");
+
+    // 1. Leer lo que ya había en el archivo
+    Json::Value arr(Json::arrayValue);
+    ifstream entrada(nombreArchivo);
+    if (entrada.is_open()) {
+        Json::Reader reader;
+        reader.parse(entrada, arr);
+        entrada.close();
     }
 
-    ofstream archivo(nombreArchivo);
-    if (!archivo.is_open()) {
-        throw runtime_error("No se pudo abrir el archivo " + nombreArchivo);
+    // 2. Agregar el nuevo cliente al array
+    arr.append(clienteAJson(cliente));
+
+    // 3. Reescribir el archivo con
+    ofstream salida(nombreArchivo);
+    if (!salida.is_open()) {
+        throw runtime_error("No se pudo abrir el archivo: " + nombreArchivo);
     }
 
     Json::StreamWriterBuilder builder;
     builder["commentStyle"] = "None";
-    builder["indentation"] = "  ";
+    builder["indentation"]  = "  ";
     unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
-    writer->write(clienteAJson(cliente), &archivo);
-    archivo.close();
+    writer->write(arr, &salida);
+    salida.close();
     return true;
 }
 
@@ -124,20 +136,30 @@ Cliente * GestorArchivos::cargarCliente(const string &nombreArchivo) {
 
 bool GestorArchivos::guardarProducto(Producto *producto, const string &nombreArchivo) {
     if (producto == nullptr) {
-        throw runtime_error("Producto nulo, no se puede guardar");
+        throw runtime_error("Producto nulo, no se puede agregar");
     }
 
-    ofstream archivo(nombreArchivo);
-    if (!archivo.is_open()) {
+    Json::Value arr(Json::arrayValue);
+    ifstream entrada(nombreArchivo);
+    if (entrada.is_open()) {
+        Json::Reader reader;
+        reader.parse(entrada, arr);
+        entrada.close();
+    }
+
+    arr.append(productoAJson(producto));
+
+    ofstream salida(nombreArchivo);
+    if (!salida.is_open()) {
         throw runtime_error("No se pudo abrir el archivo: " + nombreArchivo);
     }
 
     Json::StreamWriterBuilder builder;
     builder["commentStyle"] = "None";
-    builder["indentation"] = "  ";
+    builder["indentation"]  = "  ";
     unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
-    writer->write(productoAJson(producto), &archivo);
-    archivo.close();
+    writer->write(arr, &salida);
+    salida.close();
     return true;
 }
 
@@ -163,17 +185,26 @@ bool GestorArchivos::guardarPedido(Pedido *pedido, const string &nombreArchivo) 
         throw runtime_error("Pedido nulo, no se puede guardar");
     }
 
-    ofstream archivo(nombreArchivo);
-    if (!archivo.is_open()) {
+    Json::Value arr(Json::arrayValue);
+    ifstream entrada(nombreArchivo);
+    if (entrada.is_open()) {
+        Json::Reader reader;
+        reader.parse(entrada, arr);
+        entrada.close();
+    }
+
+    arr.append(pedidoAJson(pedido));
+    ofstream salida(nombreArchivo);
+    if (!salida.is_open()) {
         throw runtime_error("No se pudo abrir el archivo: " + nombreArchivo);
     }
 
     Json::StreamWriterBuilder builder;
     builder["commentStyle"] = "None";
-    builder["indentation"] = "  ";
+    builder["indentation"]  = "  ";
     unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
-    writer->write(pedidoAJson(pedido), &archivo);
-    archivo.close();
+    writer->write(arr, &salida);
+    salida.close();
     return true;
 }
 
@@ -196,6 +227,9 @@ Pedido * GestorArchivos::cargarPedido(const string &nombreArchivo) {
 
 
 
+
+
+//Guardar Listas Completas
 bool GestorArchivos::guardarListaClientes(Lista<Cliente> &lista, const string &nombreArchivo) {
 
 }
@@ -209,6 +243,12 @@ bool GestorArchivos::guardarListaPedidos(Lista<Pedido> &lista, const string &nom
 
 }
 
+
+
+
+
+
+//Cargar Listas Completas
 void GestorArchivos::cargarListaClientes(const string &nombreArchivo, Lista<Cliente> &lista) {
 
 }
