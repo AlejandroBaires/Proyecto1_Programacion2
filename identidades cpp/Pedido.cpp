@@ -111,5 +111,6 @@ ostream & operator<<(ostream &os, const Pedido &pedido) {
 
     os << "Estado: " << pedido.get_estado() << endl;
 
+
     return os;
 }

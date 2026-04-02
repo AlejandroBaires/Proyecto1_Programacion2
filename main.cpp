@@ -27,9 +27,6 @@ int main() {
         GestorArchivos::guardarProducto(p3);
         cout << "Producto 3 guardado: " << p3->getDescripcion() << endl;
 
-        GestorArchivos::guardarProducto(extp1);
-        cout << "Producto 4 guardado: " << extp1->getDescripcion() << endl;
-
     } catch (runtime_error& e) {
         cout << "Error guardando productos: " << e.what() << endl;
     }
@@ -72,11 +69,15 @@ int main() {
     Lista<Pedido> listaPedidos;
     try {
         GestorArchivos::cargarPedidos(listaPedidos);
-        cout << "✓ Pedidos cargados:" << endl;
+        cout << "Pedidos cargados:" << endl;
         listaPedidos.mostrarDatos();
 
+        cout<<"Pedido en especifico: "<<endl;
+       Pedido* primerNodo=listaPedidos.BuscarDato(pedido1);
+        cout<<primerNodo->toString();
+
     } catch (runtime_error& e) {
-        cout << "✗ Error cargando pedidos: " << e.what() << endl;
+        cout << "Error cargando pedidos: " << e.what() << endl;
     }
 
     return 0;
