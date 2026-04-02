@@ -46,6 +46,8 @@ public:
     string toString();
 
     ~Pedido();
+
+    friend ostream& operator<<(ostream &os, const Pedido &pedido);
 };
 
 #endif

@@ -101,3 +101,15 @@ string Pedido::toString() {
 
 Pedido::~Pedido() {
 }
+
+ostream & operator<<(ostream &os, const Pedido &pedido) {
+    os << "Pedido# " << pedido.get_num_pedido() << endl;
+
+    if (pedido.get_cliente() != nullptr) {
+        os << "Cliente: " << pedido.get_cliente()->get_nombre() << endl;
+    }
+
+    os << "Estado: " << pedido.get_estado() << endl;
+
+    return os;
+}

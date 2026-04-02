@@ -11,6 +11,7 @@
 #include "Producto.h"
 #include "Comida.h"
 #include "Bebida.h"
+#include "Pedido.h"
 #include "Postre.h"
 #include "T Lista simple/Lista.h"
 
@@ -19,7 +20,15 @@ private:
     static const string ARCHIVO_PRODUCTOS;
     static const string ARCHIVO_PEDIDOS;
 
-    static string productoAString();
+    static string productoAString(Producto* producto);
+    static Producto* stringAProducto(const string& linea);
+
+public:
+    static bool guardarProducto(Producto* producto);
+    static bool guardarPedido(Pedido* pedido);
+
+    static void cargarProductos(Lista<Producto>& listaProductos);
+    static void cargarPedidos(Lista<Pedido>& listaPedidos);
 };
 
 
