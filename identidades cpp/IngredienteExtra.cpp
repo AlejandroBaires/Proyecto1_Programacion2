@@ -15,7 +15,7 @@ string IngredienteExtra::getDescripcion() {
 }
 
 double IngredienteExtra::getPrecio() {
-    return producto->getPrecio()/0.10;
+    return producto->getPrecio()+precioExtra;
 }
 
 bool IngredienteExtra::igual(Producto &otro) {
