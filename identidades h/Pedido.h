@@ -8,7 +8,13 @@
 #include "Cliente.h"
 #include "Producto.h"
 #include "MetodoPago.h"
+//DESCUENTO
+#include "Descuento.h"
+#include "SinDescuento.h"
+#include "PorcentajeDescuento.h"
+#include "CuponDescuento.h"
 #include "../T Lista simple/Lista.h"
+
 
 class Pedido {
 private:
@@ -16,6 +22,7 @@ private:
     Cliente* cliente;
     Lista<Producto> listaProductos;
     string estado;
+    Descuento* descuento;
 public:
     Pedido(int numPedido=0, Cliente* cliente=nullptr);
 
@@ -36,12 +43,13 @@ public:
     Nodo<Producto>* getPrimer_producto();
 
     //METODOS PARTICULARES
-
     void agregar_producto(Producto* p);
 
-    double calcularTotal();//FALTA METODO EN LISTA
+    void aplicarDescuento(Descuento* d);
 
-    void  cobrarPedido(MetodoPago* metodo);//SE NECESITA CALCULAR TOTAL
+    double calcularTotal();
+
+    void  cobrarPedido(MetodoPago* metodo);
 
     string toString();
 

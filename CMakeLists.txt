@@ -35,4 +35,11 @@ add_executable(Proyecto1
         dist/jsoncpp.cpp
         GestorArchivos.cpp
         GestorArchivos.h
+        "identidades h/Descuento.h"
+        "identidades h/SinDescuento.h"
+        "identidades cpp/SinDescuento.cpp"
+        "identidades h/PorcentajeDescuento.h"
+        "identidades cpp/PorcentajeDescuento.cpp"
+        "identidades h/CuponDescuento.h"
+        "identidades cpp/CuponDescuento.cpp"
 )

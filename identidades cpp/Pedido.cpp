@@ -4,10 +4,12 @@
 
 #include "../identidades h/Pedido.h"
 
+
 Pedido::Pedido(int numPedido, Cliente *cliente) {
     this->numPedido = numPedido;
     this->cliente = cliente;
     this->estado= "Pendiente";
+    this->descuento = new SinDescuento();
 }
 
 int Pedido::get_num_pedido() const {
@@ -46,6 +48,13 @@ void Pedido::agregar_producto(Producto *p) {
     listaProductos.insertarFinal(p);
 }
 
+void Pedido::aplicarDescuento(Descuento *d) {
+    if (this->descuento != nullptr) {
+        delete this->descuento;
+    }
+    this->descuento = d;
+}
+
 double Pedido::calcularTotal() {
     if (listaProductos.estaVacio()) {
         throw runtime_error("El pedido esta vacio");
@@ -57,11 +66,13 @@ double Pedido::calcularTotal() {
         total+=aux->getDato()->getPrecio();
         aux=aux->getSiguiente();
     }
-    return total;
+
+    return this->descuento->calcularTotal(total);
 }
 
 void Pedido::cobrarPedido(MetodoPago* metodo) {
     double total = calcularTotal();
+
     if (metodo->procesarPago(total)) {
         set_estado("Pagado");
     }
@@ -100,4 +111,10 @@ string Pedido::toString() {
 }
 
 Pedido::~Pedido() {
+    if (this->descuento != nullptr) {
+        delete this->descuento;
+    }
+    if (this->cliente != nullptr) {
+        delete this->cliente;
+    }
 }
