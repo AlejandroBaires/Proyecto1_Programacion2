@@ -1,85 +1,84 @@
-//PRODUCTO
-#include "identidades h/Postre.h"
-#include "identidades h/Comida.h"
-#include "identidades h/Bebida.h"
-//PAGO
-#include "identidades h/PagoTarjeta.h"
-#include "identidades h/PagoEfectivo.h"
-//LISTA
-#include "T Lista simple/Lista.h"
-//DECORADORES
-#include "identidades h/IngredienteExtra.h"
-#include "identidades h/CambioTammano.h"
-#include "identidades h/SinIngrediente.h"
-//CLIENTE
-#include "identidades h/Cliente.h"
-//DESCUENTO
-#include "identidades h/SinDescuento.h"
-#include "identidades h/PorcentajeDescuento.h"
-#include "identidades h/CuponDescuento.h"
-//PEDIDO
-#include "identidades h/Pedido.h"
-
+#include <iostream>
+#include "IngredienteExtra.h"
+#include "GestorArchivos.h"
 
 int main() {
-cout << "=========================================" << endl;
-    cout << "   BIENVENIDO AL SISTEMA RESTAURANTE C++  " << endl;
-    cout << "=========================================\n" << endl;
 
-    // 1. CREAR EL CLIENTE
-    cout << "[1] Registrando cliente..." << endl;
-    // Asumiendo que Cliente recibe Nombre e ID/Cédula
-    Cliente* clienteActual = new Cliente("Alejandro",123);
+    cout << "===========================" << endl;
+    cout << "   PRUEBA GESTOR ARCHIVOS  " << endl;
+    cout << "===========================" << endl;
 
-    // 2. INICIAR EL PEDIDO
-    cout << "[2] Abriendo nueva orden..." << endl;
-    Pedido miOrden(1001, clienteActual);
+    //Productos de prueba
+    cout << "----- Guardando Productos -----" << endl;
 
-    // 3. CREAR PRODUCTOS (Usando polimorfismo)
-    cout << "[3] Preparando productos..." << endl;
-    // Asumiendo que tienes una clase Comida y Bebida que heredan de Producto
-    Producto* hamburguesa = new Comida(01,"Hamburguesa Doble", 4500.0);
-    Producto* papas = new Comida(02,"Papas Fritas", 1500.0);
-    Producto* refresco = new Bebida(03,"Gaseosa de Cola", 1200.0);
-    papas=new CambioTammano(papas,1);
+    Producto* p1 = new Comida(1, "Hamburguesa", 5500);
+    Producto* extp1 = new IngredienteExtra(p1, "Queso", 1000);
 
+    Producto* p2 = new Bebida(2, "Coca-Cola", 1000);
+    Producto* p3 = new Postre(3, "Helado", 700);
 
-    // 4. AGREGAR PRODUCTOS AL PEDIDO
-    cout << "[4] Agregando productos al pedido..." << endl;
-    miOrden.agregar_producto(hamburguesa);
-    miOrden.agregar_producto(papas);
-    miOrden.agregar_producto(refresco);
+    try {
+        GestorArchivos::guardarProducto(p1);
+        cout << "Producto 1 guardado: " << p1->getDescripcion() << endl;
 
-    // 5. MOSTRAR TOTAL SIN DESCUENTO
-    cout << "\n--- RESUMEN DE LA ORDEN ---" << endl;
-    // El pedido nace con "SinDescuento" por defecto, así que calcula el total normal
-    cout << "Subtotal a pagar: c" << miOrden.calcularTotal() << endl;
+        GestorArchivos::guardarProducto(p2);
+        cout << "Producto 2 guardado: " << p2->getDescripcion() << endl;
 
-    // 6. APLICAR DESCUENTO (Patrón Strategy en acción)
-    cout << "\n[!] El cliente presentó carnet de estudiante." << endl;
-    cout << "Aplicando descuento del 15%..." << endl;
+        GestorArchivos::guardarProducto(p3);
+        cout << "Producto 3 guardado: " << p3->getDescripcion() << endl;
 
-    Descuento* promoEstudiante = new PorcentajeDescuento(15.0);
-    miOrden.aplicarDescuento(promoEstudiante); // Cambiamos la estrategia dinámicamente
+    } catch (runtime_error& e) {
+        cout << "Error guardando productos: " << e.what() << endl;
+    }
 
-    // El sistema recalcula usando la nueva fórmula automáticamente
-    double totalDefinitivo = miOrden.calcularTotal();
-    cout << "Nuevo Total con Descuento: c" << totalDefinitivo << endl;
+    cout << endl;
 
-    // 7. REALIZAR EL PAGO (Patrón Strategy en acción)
-    cout << "\n[5] Procesando el pago..." << endl;
-    MetodoPago* tarjeta = new PagoTarjeta("4500-XXXX-XXXX-9876");
+    cout << "----- Guardando Pedidos -----" << endl;
 
-    // Al cobrar, el pedido le dice a la tarjeta: "Cobra el total definitivo"
-    miOrden.cobrarPedido(tarjeta);
+    Cliente* cliente1 = new Cliente("Scott", 1012);
+    Pedido* pedido1 = new Pedido(1027, cliente1);
+    pedido1->agregar_producto(extp1);
+    pedido1->agregar_producto(p2);
 
-    // 8. LIMPIEZA DE MEMORIA (¡Vital para Progra 2!)
-    cout << "\n[6] Cerrando sistema y liberando memoria..." << endl;
+    try {
+        GestorArchivos::guardarPedido(pedido1);
+        cout << "Pedido guardado: #" << pedido1->get_num_pedido() << endl;
 
-    cout<<miOrden.toString();
+    } catch (runtime_error& e) {
+        cout << "Error guardando pedido: " << e.what() << endl;
+    }
 
-    delete tarjeta;
+    cout << endl;
 
+    cout << "----- Cargando Productos -----" << endl;
+
+    Lista<Producto> listaProductos;
+    try {
+        GestorArchivos::cargarProductos(listaProductos);
+        cout << "Productos Cargados..." << endl;
+        listaProductos.mostrarDatos();
+
+    } catch (runtime_error& e) {
+        cout << "Error cargando productos: " << e.what() << endl;
+    }
+
+    cout <<  endl;
+
+    cout << "----- Cargando Pedidos -----" << endl;
+
+    Lista<Pedido> listaPedidos;
+    try {
+        GestorArchivos::cargarPedidos(listaPedidos);
+        cout << "Pedidos cargados:" << endl;
+        listaPedidos.mostrarDatos();
+
+        cout<<"Pedido en especifico: "<<endl;
+       Pedido* primerNodo=listaPedidos.BuscarDato(pedido1);
+        cout<<primerNodo->toString();
+
+    } catch (runtime_error& e) {
+        cout << "Error cargando pedidos: " << e.what() << endl;
+    }
 
     return 0;
 }
