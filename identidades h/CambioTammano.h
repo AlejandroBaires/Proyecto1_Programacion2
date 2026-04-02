@@ -7,9 +7,9 @@
 #include "ProductoDecorador.h"
 
 class CambioTammano:public ProductoDecorador{
-    string tammano;
+    int tammano;
     public:
-    CambioTammano(Producto* producto,string tammano);
+    CambioTammano(Producto* producto,int tammano);
     string getDescripcion() override;
     double getPrecio() override;
     bool igual(Producto &otro) override;

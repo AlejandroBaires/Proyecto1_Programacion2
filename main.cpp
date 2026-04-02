@@ -41,7 +41,7 @@ cout << "=========================================" << endl;
     Producto* hamburguesa = new Comida(01,"Hamburguesa Doble", 4500.0);
     Producto* papas = new Comida(02,"Papas Fritas", 1500.0);
     Producto* refresco = new Bebida(03,"Gaseosa de Cola", 1200.0);
-    papas=new CambioTammano(papas,"Grande");
+    papas=new CambioTammano(papas,1);
 
 
     // 4. AGREGAR PRODUCTOS AL PEDIDO

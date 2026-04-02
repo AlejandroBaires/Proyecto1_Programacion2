@@ -4,23 +4,28 @@
 
 #include "../identidades h/CambioTammano.h"
 
-CambioTammano::CambioTammano(Producto* producto, string tammano) {
+CambioTammano::CambioTammano(Producto* producto, int tammano) {
     this->producto = producto;
     this->tammano = tammano;
 }
 
 string CambioTammano::getDescripcion() {
-    return producto->getDescripcion()+" tamano: "+tammano;
+    switch (this->tammano) {
+        case 1: return producto->getDescripcion()+" tamano: Grande";
+        case 2: return producto->getDescripcion()+" tamano: Pequeño";
+        case 3: return producto->getDescripcion()+" tamano: Mediano";
+    }
+
 }
 
 double CambioTammano::getPrecio() {
-    if (tammano=="grande"||tammano=="Grande") {
-        return producto->getPrecio()/0.50;
-    }else if (tammano=="pequeno"||tammano=="Pequeno") {
-        return producto->getPrecio()*0.50;
+    if (tammano== 1 ) {
+        return producto->getPrecio()+(producto->getPrecio()*0.25);
+    }else if (tammano== 2) {
+        return producto->getPrecio()-(producto->getPrecio()*0.25);
     }
-    else {
-        return producto->getPrecio(); //tamaño normal, no grande ni pequeña;
+    else if (tammano== 3){
+        return producto->getPrecio();
     }
 
 }
