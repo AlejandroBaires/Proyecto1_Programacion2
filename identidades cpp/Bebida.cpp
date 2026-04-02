@@ -4,25 +4,18 @@
 
 #include "../identidades h/Bebida.h"
 
-Bebida::Bebida(int codigo,string nombre, double precioBase,int tammano):Producto(codigo),nombre(nombre),precioBase(precioBase),tamanno(tammano) {
+Bebida::Bebida(int codigo,string nombre, double precioBase):Producto(codigo),nombre(nombre),precioBase(precioBase){
 }
 
 string Bebida::getDescripcion() {
-    return "Bebida-"+this->nombre;
+    return "Bebida|"+this->nombre;
 }
 
 double Bebida::getPrecio() {
 return precioBase;
 }
 
-int Bebida::getTamanno() {
-    return tamanno;
-}
 
-
-void Bebida::setTamanno(int tamanno) {
-    this->tamanno = tamanno;
-}
 
 bool Bebida::igual(Producto &otro) {
     Bebida* o = dynamic_cast< Bebida*>(&otro);

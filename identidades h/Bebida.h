@@ -10,13 +10,11 @@ class Bebida:public Producto{
 private:
     string nombre;
     double precioBase;
-    int tamanno;
+
     public:
-    Bebida(int codigo=0,string nombre="", double precioBase=0.f, int tamanno=0);
+    Bebida(int codigo=0,string nombre="", double precioBase=0.f);
     string getDescripcion() override;
     double getPrecio() override;
-    int getTamanno();
-    void setTamanno(int tamanno);
     bool igual(Producto &otro) override;
      ~Bebida();
 };

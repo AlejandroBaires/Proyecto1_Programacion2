@@ -8,7 +8,7 @@ Postre::Postre(int codigo,string nombre, double precioBase):Producto(codigo),nom
 }
 
 string Postre::getDescripcion() {
-    return "Postre-"+this->nombre;
+    return "Postre|"+this->nombre;
 }
 
 double Postre::getPrecio() {

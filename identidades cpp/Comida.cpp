@@ -9,7 +9,7 @@ Comida::Comida(int codigo,string nombre, double precio): Producto(codigo),nombre
 }
 
 string Comida::getDescripcion() {
-    return "Comida- " + this->nombre;
+    return "Comida| " + this->nombre;
 }
 
 double Comida::getPrecio() {
