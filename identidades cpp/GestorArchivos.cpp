@@ -2,7 +2,7 @@
 // Created by ahara on 2/4/2026.
 //
 
-#include "GestorArchivos.h"
+#include "../identidades h/GestorArchivos.h"
 
 const string GestorArchivos::ARCHIVO_PRODUCTOS = "productos.txt";
 const string GestorArchivos::ARCHIVO_PEDIDOS = "pedidos.txt";

@@ -114,9 +114,6 @@ Pedido::~Pedido() {
     if (this->descuento != nullptr) {
         delete this->descuento;
     }
-    if (this->cliente != nullptr) {
-        delete this->cliente;
-    }
 }
 
 ostream & operator<<(ostream &os, const Pedido &pedido) {

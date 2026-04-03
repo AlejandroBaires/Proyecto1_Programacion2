@@ -1,6 +1,6 @@
 #include <iostream>
 #include "IngredienteExtra.h"
-#include "GestorArchivos.h"
+#include "identidades h/GestorArchivos.h"
 
 int main() {
 

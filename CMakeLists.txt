@@ -33,8 +33,8 @@ add_executable(Proyecto1
         "identidades cpp/Pedido.cpp"
         dist/json/json.h
         dist/jsoncpp.cpp
-        GestorArchivos.cpp
-        GestorArchivos.h
+        "identidades cpp/GestorArchivos.cpp"
+        "identidades h/GestorArchivos.h"
         "identidades h/Descuento.h"
         "identidades h/SinDescuento.h"
         "identidades cpp/SinDescuento.cpp"

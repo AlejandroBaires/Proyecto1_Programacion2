@@ -13,7 +13,7 @@
 #include "Bebida.h"
 #include "Pedido.h"
 #include "Postre.h"
-#include "T Lista simple/Lista.h"
+#include "../T Lista simple/Lista.h"
 
 class GestorArchivos {
 private:

@@ -14,6 +14,7 @@ string CambioTammano::getDescripcion() {
         case 1: return producto->getDescripcion()+" tamano: Grande";
         case 2: return producto->getDescripcion()+" tamano: Pequeño";
         case 3: return producto->getDescripcion()+" tamano: Mediano";
+        default: return producto->getDescripcion();
     }
 
 }
@@ -27,6 +28,7 @@ double CambioTammano::getPrecio() {
     else if (tammano== 3){
         return producto->getPrecio();
     }
+    else return producto->getPrecio();
 
 }
 
