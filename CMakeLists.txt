@@ -3,7 +3,7 @@ project(Proyecto1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories("identidades h", "Excepciones")
+include_directories("identidades h")
 
 add_executable(Proyecto1
         main.cpp
@@ -31,8 +31,6 @@ add_executable(Proyecto1
         "identidades cpp/Producto.cpp"
         "identidades h/Pedido.h"
         "identidades cpp/Pedido.cpp"
-        dist/json/json.h
-        dist/jsoncpp.cpp
         "identidades cpp/GestorArchivos.cpp"
         "identidades h/GestorArchivos.h"
         "identidades h/Descuento.h"

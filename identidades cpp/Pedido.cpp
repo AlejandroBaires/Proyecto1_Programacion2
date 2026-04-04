@@ -3,6 +3,9 @@
 //
 
 #include "../identidades h/Pedido.h"
+#include "PedidoVacioException.h"
+#include "PagoInsuficienteException.h"
+#include "PedidoYaPagadoException.h"
 
 Pedido::Pedido(int numPedido, Cliente *cliente) {
     this->numPedido = numPedido;
@@ -56,7 +59,7 @@ void Pedido::aplicarDescuento(Descuento *d) {
 
 double Pedido::calcularTotal() {
     if (listaProductos.estaVacio()) {
-        throw runtime_error("El pedido esta vacio");
+        throw PedidoVacioException();
     }
 
     double total = 0;
@@ -70,14 +73,14 @@ double Pedido::calcularTotal() {
 }
 
 void Pedido::cobrarPedido(MetodoPago* metodo) {
+    if (this->estado == "Pagado") {
+        throw PedidoVacioException();
+    }
     double total = calcularTotal();
-
-    if (metodo->procesarPago(total)) {
-        set_estado("Pagado");
+    if (!metodo->procesarPago(total)) {
+        throw PagoInsuficienteException(0, total);
     }
-    else {
-        throw runtime_error("Pago Fallido: monto insuficiente");
-    }
+    set_estado("Pagado");
 }
 
 string Pedido::toString() {
