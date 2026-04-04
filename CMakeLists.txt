@@ -3,7 +3,7 @@ project(Proyecto1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories("identidades h")
+include_directories("identidades h", "Excepciones")
 
 add_executable(Proyecto1
         main.cpp
@@ -42,4 +42,11 @@ add_executable(Proyecto1
         "identidades cpp/PorcentajeDescuento.cpp"
         "identidades h/CuponDescuento.h"
         "identidades cpp/CuponDescuento.cpp"
+        "identidades h/PedidoVacioException.h"
+        "identidades h/PedidoVacioException.h"
+        "identidades h/ArchivoNoEncontradoException.h"
+        "identidades h/ArchivoNoEncontradoException.h"
+        "identidades h/PagoInsuficienteException.h"
+        "identidades h/ProductoNoEncontradoException.h"
+        "identidades h/PedidoYaPagadoException.h"
 )

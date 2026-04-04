@@ -4,7 +4,6 @@
 
 #include "../identidades h/Pedido.h"
 
-
 Pedido::Pedido(int numPedido, Cliente *cliente) {
     this->numPedido = numPedido;
     this->cliente = cliente;
