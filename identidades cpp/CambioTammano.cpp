@@ -35,3 +35,7 @@ double CambioTammano::getPrecio() {
 bool CambioTammano::igual(Producto &otro) {
     return this->getCodigo()==otro.getCodigo();
 }
+
+Producto * CambioTammano::clonar() {
+    return new CambioTammano(producto->clonar(), tammano);
+}

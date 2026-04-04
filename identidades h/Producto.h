@@ -19,6 +19,7 @@ public:
     virtual string getDescripcion() = 0;
     virtual double getPrecio() = 0;
     virtual bool igual(Producto& otro)=0;
+    virtual Producto* clonar()=0;
     friend ostream& operator<<(ostream& os, Producto& otro);
 };
 

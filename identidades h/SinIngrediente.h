@@ -14,6 +14,7 @@ protected:
     string getDescripcion() override;
     double getPrecio() override;
     bool igual(Producto &otro) override;
+    Producto* clonar() override;
     virtual ~SinIngrediente(){};
 };
 

@@ -20,3 +20,7 @@ double SinIngrediente::getPrecio() {
 bool SinIngrediente::igual(Producto &otro) {
     return this->getCodigo()==otro.getCodigo();
 }
+
+Producto * SinIngrediente::clonar() {
+    return new SinIngrediente(producto->clonar(), this->ingrediente);
+}

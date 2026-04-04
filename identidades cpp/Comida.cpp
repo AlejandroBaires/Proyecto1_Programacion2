@@ -23,5 +23,9 @@ bool Comida::igual(Producto &producto) {
     return this->getCodigo() == o->getCodigo();
 }
 
+Producto * Comida::clonar() {
+    return new Comida(this->codigo,this->nombre,this->precioBase);
+}
+
 Comida::~Comida() {
 }

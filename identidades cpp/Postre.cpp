@@ -22,5 +22,9 @@ bool Postre::igual(Producto &otro) {
     return this->getCodigo() == o->getCodigo();
 }
 
+Producto * Postre::clonar() {
+    return new Postre(this->codigo,this->nombre,this->precioBase);
+}
+
 Postre::~Postre() {
 }

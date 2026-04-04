@@ -12,3 +12,7 @@ int ProductoDecorador::getCodigo() {
     return producto->getCodigo();
 }
 
+Producto * ProductoDecorador::clonar() {
+    return nullptr;
+}
+

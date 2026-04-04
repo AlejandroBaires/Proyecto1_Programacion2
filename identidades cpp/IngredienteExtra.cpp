@@ -21,3 +21,7 @@ double IngredienteExtra::getPrecio() {
 bool IngredienteExtra::igual(Producto &otro) {
     return this->getCodigo()==otro.getCodigo();
 }
+
+Producto * IngredienteExtra::clonar() {
+    return new IngredienteExtra(producto->clonar(), ingrediente, precioExtra);
+}

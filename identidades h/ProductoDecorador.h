@@ -14,6 +14,7 @@ protected:
     public:
     ProductoDecorador(Producto* producto=nullptr);
     int getCodigo() override;
+    Producto* clonar() override;
     virtual ~ProductoDecorador(){};
 
 };

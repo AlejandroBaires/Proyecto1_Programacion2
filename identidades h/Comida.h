@@ -15,6 +15,7 @@ class Comida:public Producto {
     string getDescripcion() override;
     double getPrecio() override;
     bool igual(Producto& producto) override;
+    Producto* clonar() override;
     ~Comida();
 };
 
