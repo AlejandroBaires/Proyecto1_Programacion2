@@ -47,4 +47,6 @@ add_executable(Proyecto1
         "identidades h/PagoInsuficienteException.h"
         "identidades h/ProductoNoEncontradoException.h"
         "identidades h/PedidoYaPagadoException.h"
+        "identidades h/Menu.h"
+        "identidades cpp/Menu.cpp"
 )
