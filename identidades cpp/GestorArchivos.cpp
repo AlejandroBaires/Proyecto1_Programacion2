@@ -3,6 +3,7 @@
 //
 
 #include "../identidades h/GestorArchivos.h"
+#include "ArchivoNoEncontradoException.h"
 
 const string GestorArchivos::ARCHIVO_PRODUCTOS = "productos.txt";
 const string GestorArchivos::ARCHIVO_PEDIDOS = "pedidos.txt";
@@ -105,7 +106,7 @@ void GestorArchivos::cargarProductos(Lista<Producto> &listaProductos) {
     ifstream archivo(ARCHIVO_PRODUCTOS);
 
     if (!archivo.is_open()) {
-        throw runtime_error("Archivo productos no encontrado");
+        throw ArchivoNoEncontradoException(ARCHIVO_PRODUCTOS);
     }
 
     string linea;
@@ -132,7 +133,7 @@ void GestorArchivos::cargarPedidos(Lista<Pedido> &listaPedidos) {
     ifstream archivo(ARCHIVO_PEDIDOS);
 
     if (!archivo.is_open()) {
-        throw runtime_error("Archivo pedidos no encontrado");
+        throw ArchivoNoEncontradoException(ARCHIVO_PEDIDOS);
     }
 
     string linea;
