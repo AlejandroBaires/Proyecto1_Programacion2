@@ -27,6 +27,8 @@
 #include "PagoEspecial.h"
 #include "GestorArchivos.h"
 #include "../T Lista simple/Lista.h"
+#include <exception>
+#include "ArchivoNoEncontradoException.h"
 
 class Menu {
 public:

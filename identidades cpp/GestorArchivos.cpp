@@ -114,8 +114,7 @@ void GestorArchivos::cargarProductos(Lista<Producto> &listaProductos) {
     while (getline(archivo, linea)) {
 
         if (linea.empty()) continue;
-        // DIFERENCIA: Se añade un bloque try-catch para evitar que el programa se caiga
-                // si un solo producto está mal formateado
+
         try {
             Producto* p = stringAProducto(linea);
             listaProductos.insertarFinal(p);

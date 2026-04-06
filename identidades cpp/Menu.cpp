@@ -486,36 +486,78 @@ void Menu::menuArchivos(Lista<Pedido>& pedidos, Lista<Producto>& catalogo) {
 
         switch (op) {
             case 1: {
-                Nodo<Producto>* aux = catalogo.getPrimerNodo();
-                while (aux) {
-                    GestorArchivos::guardarProducto(aux->getDato());
-                    aux = aux->getSiguiente();
+                try {
+                    Nodo<Producto>* aux = catalogo.getPrimerNodo();
+
+                    if (aux == nullptr) {
+                        cout << "[!] No hay productos en el catalogo ára guardar" << endl;
+                        pausar();
+                        break;
+                    }
+
+                    while (aux) {
+                        GestorArchivos::guardarProducto(aux->getDato());
+                        aux = aux->getSiguiente();
+                    }
+
+                    cout << "\n[!] Productos guardados exitosamente.\n";
+                } catch (ArchivoNoEncontradoException& e) {
+                    cout << "\n[X] Error de archivo: " << e.what() << endl;
+                } catch (const runtime_error& e) {
+                    cout << "\n[ERROR INESPERADO]: " << e.what() << endl;
                 }
-                cout << "\n[!] Productos guardados exitosamente.\n";
                 pausar();
                 break;
             }
             case 2: {
-                GestorArchivos::cargarProductos(catalogo);
-                cout << "\n[!] Productos cargados:\n\n";
-                catalogo.mostrarDatos();
+                try {
+                    GestorArchivos::cargarProductos(catalogo);
+                    cout << "\n[!] Productos cargados:\n\n";
+                    catalogo.mostrarDatos();
+                } catch (ArchivoNoEncontradoException& e) {
+                    cout << "\n[X] Error de archivo: " << e.what() << endl;
+                    cout << "Verifique que el archivo 'productos.txt' existe.\n";
+                } catch (const runtime_error& e) {
+                    cout << "\n[ERROR INESPERADO]: " << e.what() << endl;
+                }
                 pausar();
                 break;
             }
             case 3: {
-                Nodo<Pedido>* aux = pedidos.getPrimerNodo();
-                while (aux) {
-                    GestorArchivos::guardarPedido(aux->getDato());
-                    aux = aux->getSiguiente();
+                try {
+                    Nodo<Pedido>* aux = pedidos.getPrimerNodo();
+
+                    if (aux == nullptr) {
+                        cout << "\n No hay pedidos para guardar...\n";
+                        pausar();
+                        break;
+                    }
+
+                    while (aux) {
+                        GestorArchivos::guardarPedido(aux->getDato());
+                        aux = aux->getSiguiente();
+                    }
+
+                    cout << "\n[!] Productos guardados exitosamente.\n";
+                } catch (ArchivoNoEncontradoException& e) {
+                    cout << "\n[X] Error de archivo: " << e.what() << endl;
+                } catch (const runtime_error& e) {
+                    cout << "\n[ERROR INESPERADO]: " << e.what() << endl;
                 }
-                cout << "\n[!] Pedidos guardados exitosamente.\n";
                 pausar();
                 break;
             }
             case 4: {
-                GestorArchivos::cargarPedidos(pedidos);
-                cout << "\n[!] Pedidos cargados:\n\n";
-                pedidos.mostrarDatos();
+                try {
+                    GestorArchivos::cargarPedidos(pedidos);
+                    cout << "\n[!] Pedidos cargados:\n\n";
+                    pedidos.mostrarDatos();
+                } catch (ArchivoNoEncontradoException& e) {
+                    cout << "\n[X] Error de archivo: " << e.what() << endl;
+                    cout << "[!] Verifique que el archivo 'pedidos.txt' existe.\n";
+                } catch (const runtime_error& e) {
+                    cout << "\n[ERROR INESPERADO]: " << e.what() << endl;
+                }
                 pausar();
                 break;
             }
