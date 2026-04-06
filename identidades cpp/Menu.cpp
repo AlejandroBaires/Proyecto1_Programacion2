@@ -404,6 +404,9 @@ void Menu::menuPedidos(Lista<Producto>& catalogo, Lista<Cliente>& clientes, List
                 break;
             }
             case 3: {
+                pedidos.mostrarDatos();
+
+
                 cout << "\nIngrese el ID del pedido que desea ver: ";
                 int idBuscado = leerInt();
 
