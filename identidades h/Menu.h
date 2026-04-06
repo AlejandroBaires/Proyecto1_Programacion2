@@ -41,6 +41,7 @@ public:
     //Búsqueda
     static Producto* buscarProducto(Lista<Producto>& catalogo, int codigo);
     static Cliente* buscarCliente(Lista<Cliente>& clientes, int id);
+    static Pedido* buscarPedido(Lista<Pedido>& pedidos, int codigo);
 
     //Decorator
     static Producto* personalizarProducto(Producto* base);

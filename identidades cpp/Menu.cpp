@@ -101,6 +101,17 @@ Cliente* Menu::buscarCliente(Lista<Cliente>& clientes, int id) {
     return nullptr;
 }
 
+Pedido * Menu::buscarPedido(Lista<Pedido> &pedidos, int codigo) {
+    Nodo<Pedido>* aux = pedidos.getPrimerNodo();
+    while (aux != nullptr) {
+        if (aux->getDato()->get_num_pedido()==codigo)
+            return aux->getDato();
+        aux = aux->getSiguiente();
+    }
+    return nullptr;
+}
+
+
 // ================= DECORATOR =================
 
 Producto* Menu::personalizarProducto(Producto* base) {
@@ -314,9 +325,7 @@ void Menu::menuClientes(Lista<Cliente>& clientes) {
 
 // ================= PEDIDOS =================
 
-void Menu::menuPedidos(Lista<Producto>& catalogo,
-                       Lista<Cliente>& clientes,
-                       Lista<Pedido>& pedidos) {
+void Menu::menuPedidos(Lista<Producto>& catalogo, Lista<Cliente>& clientes, Lista<Pedido>& pedidos) {
 
     Pedido* actual = nullptr;
     int op;
@@ -324,7 +333,7 @@ void Menu::menuPedidos(Lista<Producto>& catalogo,
     do {
         limpiarPantalla();
         cout << "\n--- PEDIDOS ---\n";
-        if (actual) cout << "[INFO: Trabajando en el Pedido ID " << actual->get_num_pedido() << "]\n\n";
+
 
         cout << "1. Nuevo\n2. Agregar producto\n3. Ver\n4. Pagar\n0. Volver\n";
         cout << "Opcion: ";
@@ -334,6 +343,12 @@ void Menu::menuPedidos(Lista<Producto>& catalogo,
             case 1: {
                 cout << "ID Pedido: ";
                 int id = leerInt();
+
+                if (buscarPedido(pedidos, id) != nullptr) {
+                    cout << "\n[X] Error: Ya existe un pedido con ese ID.\n";
+                    pausar();
+                    break;
+                }
 
                 cout << "ID Cliente: ";
                 int idC = leerInt();
@@ -351,8 +366,21 @@ void Menu::menuPedidos(Lista<Producto>& catalogo,
                 break;
             }
             case 2: {
+                cout << "\nIngrese el ID del pedido al que desea agregar productos: ";
+                int idBuscado = leerInt();
+
+                actual = buscarPedido(pedidos, idBuscado);
+
+                if (actual) cout << "[INFO: Trabajando en el Pedido ID " << actual->get_num_pedido() << "]\n\n";
+
                 if (!actual) {
-                    cout << "\n[X] Advertencia: Primero debe crear un Nuevo Pedido (Opcion 1).\n";
+                    cout << "\n[X] Error: Pedido no encontrado.\n";
+                    pausar();
+                    break;
+                }
+
+                if (actual->get_estado() == "Pagado") {
+                    cout << "\n[X] Error: No se pueden agregar productos a un pedido que ya fue pagado.\n";
                     pausar();
                     break;
                 }
@@ -370,29 +398,48 @@ void Menu::menuPedidos(Lista<Producto>& catalogo,
                 } else {
                     Producto* personalizado = personalizarProducto(base);
                     actual->agregar_producto(personalizado);
-                    cout << "\n[!] Producto agregado al pedido actual.\n";
+                    cout << "\n[!] Producto agregado al pedido " << actual->get_num_pedido() << ".\n";
                 }
                 pausar();
                 break;
             }
             case 3: {
+                cout << "\nIngrese el ID del pedido que desea ver: ";
+                int idBuscado = leerInt();
+
+                actual = buscarPedido(pedidos, idBuscado);
+
+                if (actual) cout << "[INFO: Trabajando en el Pedido ID " << actual->get_num_pedido() << "]\n\n";
+
                 if (!actual) {
-                    cout << "\n[X] Advertencia: No hay un pedido en curso actualmente.\n";
+                    cout << "\n[X] Error: Pedido no encontrado.\n";
                 } else {
-                    cout << "\n--- DETALLE DEL PEDIDO ---\n";
+                    cout << "\n--- DETALLE DEL PEDIDO " << actual->get_num_pedido() << " ---\n";
                     cout << actual->toString() << endl;
                 }
                 pausar();
                 break;
             }
             case 4: {
+                cout << "\nIngrese el ID del pedido que desea pagar: ";
+                int idBuscado = leerInt();
+
+                actual = buscarPedido(pedidos, idBuscado);
+
+                if (actual) cout << "[INFO: Trabajando en el Pedido ID " << actual->get_num_pedido() << "]\n\n";
+
                 if (!actual) {
-                    cout << "\n[X] Advertencia: No hay un pedido pendiente de pago.\n";
+                    cout << "\n[X] Error: Pedido no encontrado.\n";
                     pausar();
                     break;
                 }
 
-                // --- NUEVO: OPCIONES DE DESCUENTO ---
+                if (actual->get_estado() == "Pagado") {
+                    cout << "\n[X] Error: Este pedido ya se encuentra cancelado.\n";
+                    pausar();
+                    break;
+                }
+
                 cout << "\n--- APLICAR DESCUENTO ---\n";
                 cout << "1. Sin Descuento\n";
                 cout << "2. Porcentaje (Ej. 15 para 15%)\n";
@@ -400,28 +447,36 @@ void Menu::menuPedidos(Lista<Producto>& catalogo,
                 cout << "Seleccione opcion: ";
                 int opcDesc = leerInt();
 
-                if (opcDesc == 2) {
-                    cout << "Ingrese el porcentaje de descuento: ";
-                    double porc = leerDouble();
-                    actual->aplicarDescuento(new PorcentajeDescuento(porc));
-                    cout << "\n[!] Descuento por porcentaje (" << porc << "%) aplicado.\n";
-                }
-                else if (opcDesc == 3) {
-                    cout << "Ingrese el monto del cupon: ";
-                    double monto = leerDouble();
-                    actual->aplicarDescuento(new CuponDescuento(monto));
-                    cout << "\n[!] Cupon de descuento (c" << monto << ") aplicado.\n";
-                }
-                else {
-                    actual->aplicarDescuento(new SinDescuento());
-                    cout << "\n[!] Sin descuento aplicado.\n";
+                switch (opcDesc) {
+                    case 1: {
+                        actual->aplicarDescuento(new SinDescuento());
+                        cout << "\n[!] Sin descuento aplicado.\n";
+                        break;
+                    }
+                    case 2: {
+                        cout << "Ingrese el porcentaje de descuento: ";
+                        double porc = leerDouble();
+                        actual->aplicarDescuento(new PorcentajeDescuento(porc));
+                        cout << "\n[!] Descuento por porcentaje (" << porc << "%) aplicado.\n";
+                        break;
+                    }
+                    case 3: {
+                        cout << "Ingrese el monto del cupon: ";
+                        double monto = leerDouble();
+                        actual->aplicarDescuento(new CuponDescuento(monto));
+                        cout << "\n[!] Cupon de descuento (c" << monto << ") aplicado.\n";
+                        break;
+                    }
+                    default: {
+                        cout << "\n[X] Opcion de descuento invalida. Operacion cancelada.\n";
+                        pausar();
+                        continue;
+                    }
                 }
 
-                // Declaramos 'pago' fuera del try-catch para poder liberar memoria correctamente siempre
                 MetodoPago* pago = nullptr;
 
                 try {
-                    // calcularTotal() lanza runtime_error si la lista está vacía, así que va en el try
                     double total = actual->calcularTotal();
                     cout << "\nTotal a pagar (con descuentos aplicados): " << total << endl;
 
@@ -429,27 +484,34 @@ void Menu::menuPedidos(Lista<Producto>& catalogo,
                     cout << "1. Efectivo  2. Tarjeta  3. Digital\nSeleccione metodo: ";
                     int tipo = leerInt();
 
-                    if (tipo == 1) {
-                        cout << "Monto entregado: ";
-                        pago = new PagoEfectivo(leerDouble());
-                    } else if (tipo == 2) {
-                        pago = new PagoTarjeta("123", "Cliente"); // Datos quemados por ahora
-                    } else {
-                        pago = new PagoEspecial("SINPE");
+                    switch (tipo) {
+                        case 1: {
+                            cout << "Monto entregado: ";
+                            pago = new PagoEfectivo(leerDouble());
+                            break;
+                        }
+                        case 2: {
+                            pago = new PagoTarjeta("123", "Cliente");
+                            break;
+                        }
+                        case 3: {
+                            pago = new PagoEspecial("SINPE");
+                            break;
+                        }
+                        default: {
+                            throw runtime_error("Opcion de pago invalida. Operacion cancelada.");
+                        }
                     }
 
-                    // Intentamos realizar el cobro
                     actual->cobrarPedido(pago);
                     cout << "\n[!] Pago procesado con exito. Estado actualizado a 'Pagado'.\n";
 
-                    actual = nullptr; // Se libera el puntero ya que el pedido finalizó exitosamente
+                    actual = nullptr;
                 }
                 catch (const runtime_error& e) {
-                    // Atrapa errores como: "El pedido esta vacio" o "Pago Fallido: monto insuficiente"
                     cout << "\n[ERROR] " << e.what() << endl;
                 }
 
-                // Liberamos la memoria del pago si fue instanciado
                 if (pago != nullptr) {
                     delete pago;
                 }
